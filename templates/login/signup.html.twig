@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block singup %}
+    <a href="{{ path('app_login') }}">
+        <button class="btn btn-dark">Sing in</button>
+    </a>
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row m-3">
+            <div class="col">
+                <form method="post" id="singupForm">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error }}</div>
+                    {% endif %}
+
+                    <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
+                    <label for="inputEmail">Email</label>
+                    <input type="email" value="{% if data is defined %}{{data.get('email')}}{% endif %}" name="email"
+                           id="inputEmail" class="form-control" required autofocus>
+
+                    <div class="mt-3">
+                        <div class="alert alert-warning alert-dismissible d-none" role="alert">
+                            <strong>Email already registered!</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <label for="inputName">Name</label>
+                    <input type="text" value="{% if data is defined %}{{data.get('name') }}{% endif %}" name="name"
+                           id="inputName" class="form-control mb-3" required>
+                    <label for="inputSurname">Surname</label>
+                    <input type="text" value="{% if data is defined %}{{ data.get('surname') }}{% endif %}" name="surname"
+                           id="inputSurname" class="form-control mb-3" required>
+                    <label for="inputPassword">Password</label>
+                    <input type="password" name="password" id="inputPassword" class="form-control mb-3" required>
+
+                    <label for="inputPasswordRepeated">Repeat password</label>
+                    <input type="password" name="passwordRepeated" id="inputPasswordRepeated" class="form-control mb-3"
+                           required>
+
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"
+                    >
+
+                    <button class="btn btn-lg btn-primary" type="submit">
+                        Sign Up
+                    </button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/auth.js') }}"></script>
+{% endblock %}
+

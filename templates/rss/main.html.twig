@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block singup %}
+    <p class="pl-2 d-inline" style="color: #444;">
+        Logged as: <strong>{{ user.getName() }}{{ user.getSurname() }}</strong>
+    </p>
+
+    <a href="{{ path('app_logout') }}">
+        <button class="btn btn-dark">Exit</button>
+    </a>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row m-3">
+            <div class="col">
+
+                <h2>Rss stream</h2>
+                <hr>
+
+                {% if feed is defined %}
+                    {% for item in feed %}
+
+                        <div class="mb-5">
+                            <div class="card" style="width: 30rem;">
+                                <img src="{{ item.image }}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ item.title }}</h5>
+                                    <p class="card-text">{{ item.description }}</p>
+                                    <a href="{{ item.link }}" class="btn btn-primary" target="_blank">read more</a>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">{{ item.pubDate }}</small>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
