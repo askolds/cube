@@ -14,7 +14,7 @@ class MailerController extends AbstractController
     const MAIL_FROM = 'no-replay@airsoftgames.eu';
     const MAIL_LINK = 'https://airsoftgames.eu/activate-user-account/';
     const MAIL_SUBJECT = 'Rss reader registration';
-    
+
     private $mailer;
 
     public function __construct(MailerInterface $mailer)
@@ -42,6 +42,7 @@ class MailerController extends AbstractController
             return self::MAIL_LINK . $hash;
         }
 
+        return null;
     }
 
 }
